@@ -11,7 +11,6 @@ export function validateAndDecodeToken(token: string) {
   return decode_jwt(secret, token);
 }
 
-
 export async function logout() {
-    cookies().set("session", "", { expires: new Date(0) });
-  }
+    cookies().set("token", "", { expires: new Date(0) });
+}

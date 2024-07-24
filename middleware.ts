@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decode_jwt } from "jwt-toolkit-fast";
-import { validateAndDecodeToken } from "./app/lib/auth";
+import { decode_jwt, validate_jwt } from "jwt-toolkit-fast";
 
 const secret = 'secret';
 
@@ -16,23 +15,23 @@ export async function middleware(request: NextRequest) {
   console.log('Is Protected Route:', isProtectedRoute);
 
   if (isProtectedRoute) {
-    if (!session) {
+    if (!session || !session.value) {
       // If no session, redirect to login
       console.log('No session cookie found. Redirecting to login.');
       return NextResponse.redirect(new URL('/login', request.url));
     }
 
     try {
-      // // Validate the JWT
-      // const isValid = validate_jwt(secret, session.value);
-      // console.log('Is JWT Valid:', isValid);
+      // Validate the JWT
+      const isValid = await validate_jwt(secret, session.value); // Await the result
+      console.log('Is JWT Valid:', isValid);
 
-      // if (!isValid) {
-      //   throw new Error('Invalid or expired token');
-      // }
+      if (!isValid) {
+        throw new Error('Invalid or expired token');
+      }
 
       // Decode the JWT to extract user data
-      const decodedToken = await decode_jwt("secret", session.value)
+      const decodedToken = await decode_jwt(secret, session.value);
       console.log(decodedToken);
       
       // Proceed with the request

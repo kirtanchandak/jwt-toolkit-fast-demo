@@ -8,7 +8,7 @@ export default function Home() {
         <form
         action={async () => {
           "use server";
-          await logout();
+           logout();
         }}
       >
         <button type="submit">Logout</button>
