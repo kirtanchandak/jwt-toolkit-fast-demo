@@ -13,7 +13,7 @@ export default function Login() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id, payload: { username }, ttl: 3600 }),
+      body: JSON.stringify({ id, payload: { username }, ttl: 120 }),
     });
 
     const data = await response.json();
