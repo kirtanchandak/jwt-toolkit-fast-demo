@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 interface User {
   payload: any;
   username: string;
+  id: string;
 }
 
 export default function Profile() {
