@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     }
 
     const token = tokenCookie.value;
-    const secret = "secret"
+    const secret = process.env.JWT_SECRET || "";
     console.log(token);
 
     try {

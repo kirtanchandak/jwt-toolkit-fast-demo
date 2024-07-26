@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { encode_jwt } from 'jwt-toolkit-fast';
 
-const secret = 'secret';
+const secret = process.env.JWT_SECRET || "";
 
 export async function POST(request: NextRequest) {
   try {

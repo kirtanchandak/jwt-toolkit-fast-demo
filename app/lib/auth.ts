@@ -1,7 +1,7 @@
 import { decode_jwt } from 'jwt-toolkit-fast';
 import { cookies } from 'next/headers';
 
-const secret = 'secret';
+const secret = process.env.JWT_SECRET || "";
 
 export async function validateAndDecodeToken(token: string) {  
   const isValid = await decode_jwt(secret, token);

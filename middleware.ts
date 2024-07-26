@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { decode_jwt, validate_jwt } from "jwt-toolkit-fast";
 
-const secret = 'secret';
+const secret = process.env.JWT_SECRET || "";
 
 export async function middleware(request: NextRequest) {
   const session = request.cookies.get('token');
