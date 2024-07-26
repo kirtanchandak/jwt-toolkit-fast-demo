@@ -14,7 +14,7 @@ This is a demo application for demonstration for the library `jwt-toolkit-fast` 
 Install my-project with npm
 
 ```bash
-  git clone https://github.com/kirtanchandak/jwt-toolkit-fast
+  git clone https://github.com/kirtanchandak/jwt-toolkit-fast-demo
   cd jwt-toolkit-fast
 ```
 Install dependencies
