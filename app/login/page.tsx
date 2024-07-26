@@ -14,6 +14,7 @@ export default function Login() {
     setId(uuidv4());
   }, []);
 
+  const options = {ttl: 120, iss: "noscrubs", aud: "users"}
   const generateToken = async (e: any) => {
     e.preventDefault();
     const response = await fetch("/api/login", {
@@ -21,7 +22,7 @@ export default function Login() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id, payload: { username }, ttl: 3600 }),
+      body: JSON.stringify({ id, payload: { username }, options }),
     });
 
     const data = await response.json();

@@ -5,19 +5,19 @@ const secret = 'secret';
 
 export async function POST(request: NextRequest) {
   try {
-    const { id, payload, ttl } = await request.json();
+    const { id, payload, options } = await request.json();
 
     if (!id || !payload) {
       return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
     }
 
-    const token = await encode_jwt(secret, id, payload, ttl);
+    const token = await encode_jwt(secret, id, payload, options);
 
     const response = NextResponse.json({ token });
     response.cookies.set('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: ttl || 3600, 
+      maxAge: options.ttl || 3600, 
       path: '/',
     });
 
