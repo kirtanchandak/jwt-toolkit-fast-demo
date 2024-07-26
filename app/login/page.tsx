@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function Login() {
   const [username, setUsername] = useState("");
-  const [token, setToken] = useState("");
   const [id, setId] = useState("");
   const router = useRouter();
 
@@ -23,11 +22,8 @@ export default function Login() {
       },
       body: JSON.stringify({ id, payload: { username }, options }),
     });
-
-    const data = await response.json();
-    setToken(data.token);
-
-    if (data.token) {
+    
+    if (response.status === 200) {
       router.push("/profile");
     }
   };
